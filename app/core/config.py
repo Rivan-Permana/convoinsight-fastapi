@@ -3,11 +3,12 @@ from pydantic_settings import BaseSettings
 from typing import List
 
 class Settings(BaseSettings):
+    # API
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "ConvoInsight API"
     VERSION: str = "0.1.0"
 
-    # GCP
+    # GCP/GCS
     GCP_PROJECT_ID: str = os.getenv("GCP_PROJECT_ID", "")
     GCS_BUCKET: str = os.getenv("GCS_BUCKET", "convoinsight-assets")
     GCS_DATASETS_PREFIX: str = os.getenv("GCS_DATASETS_PREFIX", "datasets/")
