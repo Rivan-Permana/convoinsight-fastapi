@@ -20,9 +20,7 @@ class InferenceEngine:
         self.model = model
         self.api_key = api_key
         self.loader = PromptLoader(pipeline_path)
-        # set key untuk dua provider umum (OPENAI/GEMINI) bila sama
         import os
-        os.environ.setdefault("OPENAI_API_KEY", self.api_key)
         os.environ.setdefault("GEMINI_API_KEY", self.api_key)
         self.llm = LiteLLM(model=self.model, api_key=self.api_key)
 
