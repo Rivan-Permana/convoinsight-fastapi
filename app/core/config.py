@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     GCS_CHARTS_PREFIX: str = os.getenv("GCS_CHARTS_PREFIX", "charts/")
 
     # LLM via LiteLLM ('gemini/gemini-2.5-pro')
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "gemini/gemini-2.5-pro")
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
 
     # Path ke file pipeline (harus sama namanya)
