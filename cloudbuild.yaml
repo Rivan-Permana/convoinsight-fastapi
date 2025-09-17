@@ -1,0 +1,37 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build','-t','$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE:$_TAG','.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push','$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE:$_TAG']
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - $_SERVICE
+      - --image=$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE:$_TAG
+      - --region=$_REGION
+      - --platform=managed
+      - --allow-unauthenticated
+      - --set-env-vars=GCP_PROJECT_ID=$PROJECT_ID,GCS_BUCKET=$_GCS_BUCKET,GCS_DATASETS_PREFIX=$_GCS_DATASETS_PREFIX,GCS_CHARTS_PREFIX=$_GCS_CHARTS_PREFIX,PIPELINE_PATH=$_PIPELINE_PATH,LLM_MODEL=$_LLM_MODEL
+      - --set-secrets=OPENAI_API_KEY=OPENAI_API_KEY:latest
+      - --cpu=2
+      - --memory=2Gi
+      - --concurrency=40
+      - --min-instances=1
+
+substitutions:
+  _REGION: asia-southeast2
+  _REPO: convoinsight
+  _SERVICE: convoinsight-api
+  _TAG: latest
+  _GCS_BUCKET: convoinsight-assets
+  _GCS_DATASETS_PREFIX: datasets/
+  _GCS_CHARTS_PREFIX: charts/
+  _PIPELINE_PATH: pipeline/copy_of_3rd_copy_of_ml_bi_pipeline_a0_0_5.py
+  _LLM_MODEL: gemini/gemini-2.5-pro
+
+images:
+  - '$_REGION-docker.pkg.dev/$PROJECT_ID/$_REPO/$_SERVICE:$_TAG'
