@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     # Path ke file pipeline (harus sama namanya)
     PIPELINE_PATH: str = os.getenv(
         "PIPELINE_PATH",
-        "pipeline/copy_of_3rd_copy_of_ml_bi_pipeline_a0_0_5.py"
+        "pipeline/4th_copy_of_ml_bi_pipeline_a0_0_5.py"
     )
 
     # CORS
