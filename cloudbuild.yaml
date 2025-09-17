@@ -30,7 +30,7 @@ substitutions:
   _GCS_BUCKET: convoinsight-assets
   _GCS_DATASETS_PREFIX: datasets/
   _GCS_CHARTS_PREFIX: charts/
-  _PIPELINE_PATH: pipeline/copy_of_3rd_copy_of_ml_bi_pipeline_a0_0_5.py
+  _PIPELINE_PATH: pipeline/4th_copy_of_ml_bi_pipeline_a0_0_5.py
   _LLM_MODEL: gemini/gemini-2.5-pro
 
 images:
